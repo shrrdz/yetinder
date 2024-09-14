@@ -1,0 +1,40 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h1 class="text-primary mt-4" style="font-weight: bold; text-align: center;">Rate a Yeti</h1>
+
+{% if yeti %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Height</th>
+                <th scope="col">Weight</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ yeti.name }}</td>
+                <td>{{ yeti.height }}</td>
+                <td>{{ yeti.weight }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-center mt-2" style="gap: 8px">
+        <form action="{{ path('upvote-yeti', { id: yeti.id }) }}" method="post">
+            <button class="btn btn-success" type="submit">+1</button>
+        </form>
+
+        <form action="{{ path('downvote-yeti', { id: yeti.id }) }}" method="post">
+            <button class="btn btn-danger" type="submit">-1</button>
+        </form>
+    </div>
+{% else %}
+    <tr>No Yetis have been found.</tr>
+{% endif %}
+
+    <div class="d-flex justify-content-center mt-2">
+        <button class="btn btn-primary" onclick="window.location.href='/'">Back</button>
+    </div>
+{% endblock %} 

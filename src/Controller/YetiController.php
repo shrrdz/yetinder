@@ -52,4 +52,51 @@ class YetiController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    #[Route(path: '/rate-yeti', name: 'rate-yeti')]
+    public function randomYeti(YetiRepository $yetiRepository): Response
+    {
+        $yetis = $yetiRepository->findAll();
+
+        // there are no yetis in the database
+        if (!$yetis)
+        {
+            return $this->render('app/rate-yeti.html.twig', [
+                'yeti' => null,
+            ]);
+        }
+
+        // pick a random yeti
+        $randomYeti = $yetis[array_rand($yetis)];
+
+        return $this->render('app/rate-yeti.html.twig', [
+            'yeti' => $randomYeti,
+        ]);
+    }
+
+    #[Route(path: '/upvote-yeti/{id}', name: 'upvote-yeti', methods: ['POST'])]
+    public function upvoteYeti(int $id, YetiRepository $yetiRepository): Response
+    {
+        $yeti = $yetiRepository->find($id);
+
+        $yeti->setRating($yeti->getRating() + 1);
+
+        $this->em->persist($yeti);
+        $this->em->flush();
+
+        return $this->redirectToRoute('rate-yeti');
+    }
+
+    #[Route(path: '/downvote-yeti/{id}', name: 'downvote-yeti', methods: ['POST'])]
+    public function downvoteYeti(int $id, YetiRepository $yetiRepository): Response
+    {
+        $yeti = $yetiRepository->find($id);
+
+        $yeti->setRating($yeti->getRating() - 1);
+
+        $this->em->persist($yeti);
+        $this->em->flush();
+
+        return $this->redirectToRoute('rate-yeti');
+    }
 }
