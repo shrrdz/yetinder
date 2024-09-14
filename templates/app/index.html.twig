@@ -7,4 +7,28 @@
         <button class="btn btn-primary" onclick="window.location.href='/add-yeti'">Add a Yeti</button>
     </div>
 
+    <h3 class="text-primary mt-4">Top Yetis</h3>
+
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">Rank</th>
+            <th scope="col">Name</th>
+            <th scope="col">Height</th>
+            <th scope="col">Weigth</th>
+            <th scope="col">Rating</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for yeti in top_rated_yetis %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ yeti.name }}</td>
+                    <td>{{ yeti.height }}</td>
+                    <td>{{ yeti.weight }}</td>
+                    <td>{{ yeti.rating }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

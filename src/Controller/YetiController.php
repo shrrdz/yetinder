@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Yeti;
 use App\Form\YetiType;
+use App\Repository\YetiRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,9 +21,14 @@ class YetiController extends AbstractController
     }
 
     #[Route(path: '/', name: 'index')]
-    public function index(): Response
+    public function index(YetiRepository $yetiRepository): Response
     {
-        return $this->render('app/index.html.twig');
+        // fetch top ten yetis from the database based on their rating
+        $topRatedYetis = $yetiRepository->findTopRatedYetis();
+
+        return $this->render('app/index.html.twig', [
+            'top_rated_yetis' => $topRatedYetis
+        ]);
     }
 
     // add a Yeti to the database

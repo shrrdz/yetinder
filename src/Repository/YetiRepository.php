@@ -12,4 +12,13 @@ class YetiRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Yeti::class);
     }
+
+    public function findTopRatedYetis(): array
+    {
+        return $this->createQueryBuilder('yeti')
+            ->orderBy('yeti.rating', 'DESC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
+    }
 }
