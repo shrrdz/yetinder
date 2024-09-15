@@ -2,10 +2,17 @@
 
 {% block body %}
     <h1 class="text-primary mt-4" style="font-weight: bold; text-align: center;">Yetinder</h1>
-
+    <h3 class="text-primary mt-4" style="text-align: center;">{{ app.user ? 'Welcome, ' ~ app.user.username ~ '!' : 'You are not signed in.' }}</h1>
+    
     <div class="d-flex justify-content-center mt-4" style="gap: 8px">
-        <button class="btn btn-primary" onclick="window.location.href='/add-yeti'">Add a Yeti</button>
-        <button class="btn btn-primary" onclick="window.location.href='/rate-yeti'">Rate Yetis</button>
+        {% if app.user %}
+            <button class="btn btn-primary" onclick="window.location.href='/add-yeti'">Add a Yeti</button>
+            <button class="btn btn-primary" onclick="window.location.href='/rate-yeti'">Rate Yetis</button>
+        {% else %}
+                <button class="btn btn-primary" onclick="window.location.href='/register'">Register</button>
+        {% endif %}
+        
+        <button class="btn btn-primary" onclick="window.location.href='/{{ app.user ? 'logout' : 'login' }}'">{{ app.user ? 'Logout' : 'Sign in' }}</button>
     </div>
 
     <h3 class="text-primary mt-4">Top Yetis</h3>

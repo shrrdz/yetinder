@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+    
+{% block body %}
+    <h1 class="text-primary mt-4" style="font-weight: bold;">Register</h1>
+
+    <div class="mt-4">
+        {{ form_errors(registrationForm) }}
+
+        {{ form_start(registrationForm) }}
+            <div class="form-group">
+                Username
+                {{ form_widget(registrationForm.username, {'attr':{'class':'form-control'}}) }}
+            
+                Password
+                {{ form_widget(registrationForm.plainPassword, {'attr':{'class':'form-control'}}) }}
+            
+                {{ form_widget(registrationForm.agreeTerms, {'attr': {'style': 'margin-top: 20px;'}}) }}
+                I agree to the Terms of Service
+
+            </div>
+
+            <button class="btn btn-primary mt-2" type="submit">Register</button>
+        {{ form_end(registrationForm) }}
+    </div>
+{% endblock %}
