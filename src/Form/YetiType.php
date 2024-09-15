@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Yeti;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,6 +17,18 @@ class YetiType extends AbstractType
             ->add('name')
             ->add('height')
             ->add('weight')
+            ->add('color', ChoiceType::class, [
+                'choices'  => [
+                    'Red' => 'red',
+                    'Green' => 'green',
+                    'Blue' => 'blue',
+                    'Yellow' => 'yellow',
+                    'Magenta' => 'magenta',
+                    'Cyan' => 'cyan',
+                    'Black' => 'black',
+                    'White' => 'white'
+                ],
+                'placeholder' => 'Choose a color...'])
             ->add('add', SubmitType::class)
         ;
     }

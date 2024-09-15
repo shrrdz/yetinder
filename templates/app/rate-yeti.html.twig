@@ -4,12 +4,13 @@
     <h1 class="text-primary mt-4" style="font-weight: bold; text-align: center;">Rate a Yeti</h1>
 
 {% if yeti %}
-    <table class="table">
+    <table class="table align-middle" style="text-align: center;">
         <thead>
             <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Height</th>
                 <th scope="col">Weight</th>
+                <th scope="col">Color</th>
             </tr>
         </thead>
         <tbody>
@@ -17,6 +18,7 @@
                 <td>{{ yeti.name }}</td>
                 <td>{{ yeti.height }}</td>
                 <td>{{ yeti.weight }}</td>
+                <td>{{ yeti.color }}</td>
             </tr>
         </tbody>
     </table>

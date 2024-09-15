@@ -14,6 +14,10 @@
 
                 {{ form_label(form.weight) }}
                 {{ form_widget(form.weight, {'attr':{'class':'form-control'}}) }}
+
+                {{ form_label(form.color) }}
+                {{ form_widget(form.color, {'attr': {'class': 'form-control'}}) }}
+        </div>
             </div>
 
             {{ form_widget(form.add, {'attr': {'class': 'btn btn-primary mt-2'}, 'label': 'Add'}) }}

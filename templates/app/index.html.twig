@@ -12,18 +12,19 @@
                 <button class="btn btn-primary" onclick="window.location.href='/register'">Register</button>
         {% endif %}
         
-        <button class="btn btn-primary" onclick="window.location.href='/{{ app.user ? 'logout' : 'login' }}'">{{ app.user ? 'Logout' : 'Sign in' }}</button>
+        <button class="btn btn-primary" onclick="window.location.href='/{{ app.user ? 'logout' : 'login' }}'">{{ app.user ? 'Sign out' : 'Sign in' }}</button>
     </div>
 
-    <h3 class="text-primary mt-4">Top Yetis</h3>
+    <h3 class="text-primary" style="font-weight: bold; margin-top: 64px;">Top Yetis</h3>
 
-    <table class="table">
+    <table class="table align-middle mt-4" style="text-align: center;">
         <thead>
             <tr>
             <th scope="col">Rank</th>
             <th scope="col">Name</th>
             <th scope="col">Height</th>
             <th scope="col">Weigth</th>
+            <th scope="col">Color</th>
             <th scope="col">Rating</th>
             <th scope="col"></th>
             </tr>
@@ -35,6 +36,7 @@
                     <td>{{ yeti.name }}</td>
                     <td>{{ yeti.height }}</td>
                     <td>{{ yeti.weight }}</td>
+                    <td>{{ yeti.color }}</td>
                     <td>{{ yeti.rating }}</td>
                     <td><a href="{{ path('rating-history', { id: yeti.id}) }}" class="btn btn-primary">Rating History</a></td>
                 </tr>

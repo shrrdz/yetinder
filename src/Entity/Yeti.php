@@ -22,10 +22,13 @@ class Yeti
     #[ORM\Column]
     private ?int $weight = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(length: 255)]
+    private ?string $color = null;
+
+    #[ORM\Column]
     private ?int $rating = 0;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column]
     private ?array $ratingHistory = [];
 
     public function getId(): ?int
@@ -65,6 +68,18 @@ class Yeti
     public function setWeight(int $weight): static
     {
         $this->weight = $weight;
+
+        return $this;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(string $color): static
+    {
+        $this->color = $color;
 
         return $this;
     }
