@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Yeti;
+use App\Entity\User;
 use App\Form\YetiType;
 use App\Repository\YetiRepository;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -75,11 +77,15 @@ class YetiController extends AbstractController
     }
 
     #[Route(path: '/upvote-yeti/{id}', name: 'upvote-yeti', methods: ['POST'])]
-    public function upvoteYeti(int $id, YetiRepository $yetiRepository): Response
+    public function upvoteYeti(YetiRepository $yetiRepository, $id): Response
     {
         $yeti = $yetiRepository->find($id);
 
+        $now = new DateTime();
+        $date = date('Y/m/d H:i:s', $now->getTimestamp());
+
         $yeti->setRating($yeti->getRating() + 1);
+        $yeti->addRatingToHistory([$date => ($yeti->getRating())]);
 
         $this->em->persist($yeti);
         $this->em->flush();
@@ -88,15 +94,29 @@ class YetiController extends AbstractController
     }
 
     #[Route(path: '/downvote-yeti/{id}', name: 'downvote-yeti', methods: ['POST'])]
-    public function downvoteYeti(int $id, YetiRepository $yetiRepository): Response
+    public function downvoteYeti(YetiRepository $yetiRepository, $id): Response
     {
         $yeti = $yetiRepository->find($id);
 
+        $now = new DateTime();
+        $date = date('Y/m/d H:i:s', $now->getTimestamp());
+
         $yeti->setRating($yeti->getRating() - 1);
+        $yeti->addRatingToHistory([$date => ($yeti->getRating())]);
 
         $this->em->persist($yeti);
         $this->em->flush();
 
         return $this->redirectToRoute('rate-yeti');
+    }
+
+    #[Route(path: '/rating-history/{id}', name: 'rating-history')]
+    public function ratingHistory(YetiRepository $yetiRepository, $id)
+    {
+        $yeti = $yetiRepository->find($id);
+
+        return $this->render('app/rating-history.html.twig', [
+            'yeti' => $yeti
+        ]);
     }
 }

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-primary mt-4" style="font-weight: bold; text-align: center;">Rating History</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Rating</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key, value in yeti.ratingHistory %}
+                <tr>
+                    <td>{{ key }}</td>
+                    <td>{{ value }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <div class="d-flex justify-content-center mt-2">
+        <button class="btn btn-primary" onclick="window.location.href='/'">Back</button>
+    </div>
+{% endblock %}

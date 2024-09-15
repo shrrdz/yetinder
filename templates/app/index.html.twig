@@ -25,6 +25,7 @@
             <th scope="col">Height</th>
             <th scope="col">Weigth</th>
             <th scope="col">Rating</th>
+            <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -35,6 +36,7 @@
                     <td>{{ yeti.height }}</td>
                     <td>{{ yeti.weight }}</td>
                     <td>{{ yeti.rating }}</td>
+                    <td><a href="{{ path('rating-history', { id: yeti.id}) }}" class="btn btn-primary">Rating History</a></td>
                 </tr>
             {% endfor %}
         </tbody>

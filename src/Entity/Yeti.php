@@ -25,6 +25,9 @@ class Yeti
     #[ORM\Column(nullable: true)]
     private ?int $rating = 0;
 
+    #[ORM\Column(nullable: true)]
+    private ?array $ratingHistory = [];
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +77,25 @@ class Yeti
     public function setRating(int $rating): static
     {
         $this->rating = $rating;
+
+        return $this;
+    }
+
+    public function getRatingHistory(): array
+    {
+        return $this->ratingHistory;
+    }
+
+    public function setRatingHistory(array $ratingHistory): static
+    {
+        $this->ratingHistory = $ratingHistory;
+
+        return $this;
+    }
+
+    public function addRatingToHistory(array $rating): static
+    {
+        $this->ratingHistory += $rating;
 
         return $this;
     }
